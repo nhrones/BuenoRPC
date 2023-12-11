@@ -9,7 +9,6 @@ const ioBC = new BroadcastChannel("sse-io-rpc");
 export async function routeRequest(req: Request) {
    const data = await req.json();
    const path = new URL(req.url).pathname
-   if (DEBUG) console.log(`Broker handling: ${path}`)
    switch (path) {
       case '/SSERPC/kvRequest':
          kvBC.postMessage(data);

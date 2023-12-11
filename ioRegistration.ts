@@ -10,7 +10,6 @@ import {
  * This stream supports remote DB transaction procedures (SSE-RPC)      
  */
 export function registerIOclient(): Response {
-   console.log(`registering IOclient!`)
    // All RPC requests are broadcast on this channel
    const thisChannel = new BroadcastChannel("sse-io-rpc");
 
@@ -24,8 +23,6 @@ export function registerIOclient(): Response {
             let thisError: string | null = null
             let thisResult = null
             const {folder, fileName, content } = params
-            console.log(`procedure called: txID ${txID}, ${procedure}`)
-            console.info(`    params ${JSON.stringify(params)}`)
             // calling Snapshot procedures
             switch (procedure) {
 
@@ -42,7 +39,6 @@ export function registerIOclient(): Response {
                   const result = await getFile(folder, fileName)
                   thisError = null
                   thisResult = result
-                  console.info('GET_FILE: ', result)
                   break;
                }
 

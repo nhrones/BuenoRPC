@@ -17,7 +17,6 @@ import { registerIOclient } from "./ioRegistration.ts";
 
 // Service all HTTP requests
 Deno.serve({ port: 9099 }, (request: Request): Response | Promise<Response> => {
-   console.log(`Serve request: ${request.url}`)
    // Is this a KV-rpc registration request?
    if (request.url.includes("SSERPC/kvRegistration")) {
       // register our new RPC-client
@@ -30,11 +29,6 @@ Deno.serve({ port: 9099 }, (request: Request): Response | Promise<Response> => {
 
    } // POST request = KvRPC (Remote Procedure Calls)    
    else if (request.method === 'POST') {
-      // extract the request payload
-      //const data = await request.json();
-      // inform all interested parties about this new RPC request
-      //bc.postMessage(data);
-      console.log(`POST: ${request.url}`)
       Broker.routeRequest(request)
       // acknowledge the request 
       return new Response('', {

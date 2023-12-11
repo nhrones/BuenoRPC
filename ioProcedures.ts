@@ -5,8 +5,6 @@ import type { WalkEntry } from "./deps.ts";
 
 /** Get folder contents */
 export const getFolderContent = (path: string) => {
-   //if (path === '') path = './'
-   console.log(`getFolderContent ${path}`)
     const paths: WalkEntry[] = []
     const entires = walkSync(path, {
         includeFiles: true,
@@ -25,7 +23,6 @@ export const getFolderContent = (path: string) => {
  * Save file content 
  */
 export const saveFile = (folder: string, fileName: string, content: string): Promise<void> => {
-    console.log(`saving - folder ${folder} fileName ${fileName} content = ${content}`)
     return Deno.writeTextFile(join(folder, fileName), content);
 }
 
