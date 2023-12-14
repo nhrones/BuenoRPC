@@ -23,6 +23,7 @@ console.log(`DEBUG = ${DEBUG}, RunningOnDeploy = ${RunningOnDeploy}`)
 
 // Service all HTTP requests
 Deno.serve({ port: 9099 }, (request: Request): Response | Promise<Response> => {
+   if (DEBUG) console.log(request.url)
    // Is this a KV-rpc registration request?
    if (request.url.includes("SSERPC/kvRegistration")) {
       // register our new RPC-client
