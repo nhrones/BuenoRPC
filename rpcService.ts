@@ -46,5 +46,6 @@ Deno.serve({ port: 9099 }, (request: Request): Response | Promise<Response> => {
 <h3>Please see <a href="https://github.com/nhrones/KvRPC_TreeClient">KvRPC_TreeClient for usage.</a></h3>`,
          { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
    }
-}
-)
+
+})
+

@@ -1,4 +1,4 @@
-# SSE-RPC
+# Bueno-RPC
 Remote Procedure Calls via Sever Sent Events   
 
 ![Alt text](overview.bmp)

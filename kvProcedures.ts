@@ -1,8 +1,11 @@
 // deno-lint-ignore-file no-explicit-any
 
+const RunningOnDeploy = !!Deno.env.get("DENO_REGION")
 let db: Deno.Kv
 async function initDB() { 
-   db = await Deno.openKv();
+   db = (RunningOnDeploy) 
+      ? await Deno.openKv()
+      : await Deno.openKv("./data/db.db")
 }   
 
 
@@ -96,4 +99,19 @@ const fireMutationEvent = (key: any[], type: string) => {
    const bc = new BroadcastChannel("sse-rpc")
    bc.postMessage({ txID: -1, procedure: "MUTATION", params: { key, type } })
    bc.close();
+}
+
+// utility to bulk transfer kv rows
+export async function copyDB(from ='data.db', to = '') {
+
+   const fromDB = await Deno.openKv(from)
+   const toDB = (to.length > 0) 
+      ? await Deno.openKv(to) 
+      : await Deno.openKv();
+
+   const entries = fromDB.list({ prefix: [] })
+   for await (const entry of entries) {
+      await toDB.set(entry.key, entry.value);
+   }
+
 }
