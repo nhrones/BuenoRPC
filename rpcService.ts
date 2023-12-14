@@ -15,6 +15,12 @@ import { registerKVclient } from "./kvRegistration.ts";
 import { registerIOclient } from "./ioRegistration.ts";
 
 
+const RunningOnDeploy = !!Deno.env.get("DENO_REGION")
+const DEBUG = !!Deno.env.get("DEBUG")
+console.log(`DEBUG = ${DEBUG}, RunningOnDeploy = ${RunningOnDeploy}`)
+
+
+
 // Service all HTTP requests
 Deno.serve({ port: 9099 }, (request: Request): Response | Promise<Response> => {
    // Is this a KV-rpc registration request?
