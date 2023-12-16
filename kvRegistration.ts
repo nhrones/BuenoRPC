@@ -1,5 +1,6 @@
 import { StreamHeaders } from './constants.ts'
 import {
+   clearAll,
    deleteRow,
    getRow,
    getAll,
@@ -75,6 +76,15 @@ export function registerKVclient(): Response {
                case 'GETALL': {
                   const resultSet = await getAll()
                   thisResult = JSON.stringify(resultSet)
+                  break;
+               }
+
+               /** 
+                * Return all records 
+                */
+               case 'CLEARALL': {
+                  await clearAll()
+                  thisResult = 'ok'
                   break;
                }
 
