@@ -1,13 +1,15 @@
 
 /**
- * SSE-RPC Broker Service
- * This service watches for SSERPC registration requests
- * When a request id recieved, it is routed to a broker that
- * will register an appropriate SSE stream for the client.
+ * SSE-RPC Service server
+ * This server watches for SSERPC registration requests.   
+ * When an RPC-registration request is recieved, it will    
+ * register an appropriate SSE stream for the client.   
  * 
- * The service also routes all POST requests to an appropriate
- * BroadcastChannel (BC), where all registered clients will recieve the
- * procedure request by monitoring the BC message events.
+ * The service also routes all POST requests to a broker service.  
+ * This service will select a specific BroadcastChannel (BC), 
+ * that will transmit the RPC-request to an appropriate RPC registrar, 
+ * where the procedure request will be sent to be executed by the    
+ * requested method.
  */
 
 import * as Broker from "./rpcBroker.ts"
@@ -35,7 +37,7 @@ Deno.serve({ port: 9099 }, (request: Request): Response | Promise<Response> => {
       // register our new RPC-client
       return registerIOclient()
 
-   } // POST request = KvRPC (Remote Procedure Calls)    
+   } // POST request = RPC (Remote Procedure Calls)    
    else if (request.method === 'POST') {
       Broker.routeRequest(request)
       // acknowledge the request 
