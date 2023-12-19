@@ -1,0 +1,1 @@
+deno install -A --unstable -n rpc rpcService.ts

@@ -2,13 +2,9 @@
 	"version": "2.0.0",
 	"tasks": [
       {
-         "type": "deno",
-         "command": "run",
-         "args": ["-A", "--unstable", "rpcService.ts"],
-         "problemMatcher": [
-            "$deno"
-         ],
-         "label": "RUN RPC SERVICE"
+         "type": "shell",
+         "command": "rpc",
+         "label": "RUN RPC"
       }
    ]
 }
