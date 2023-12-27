@@ -15,7 +15,7 @@ export function registerKVclient(req: Request, DEBUG: boolean): Response {
 
    const { searchParams } = new URL(req.url);
 
-   const client = searchParams.get('client') || ''
+   const client = searchParams.get('client') || 'unknown'
    if (DEBUG) console.log('Client registering for KV-SSE: ', client)
 
    // All RPC requests are broadcast on this channel
