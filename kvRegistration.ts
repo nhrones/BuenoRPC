@@ -11,7 +11,12 @@ import {
  * Subscribes a client to a Server Sent Event stream    
  * This stream supports remote DB transaction procedures (SSE-RPC)      
  */
-export function registerKVclient(): Response {
+export function registerKVclient(req: Request, DEBUG: boolean): Response {
+
+   const { searchParams } = new URL(req.url);
+
+   const client = searchParams.get('client') || ''
+   if (DEBUG) console.log('Client registering for KV-SSE: ', client)
 
    // All RPC requests are broadcast on this channel
    const thisChannel = new BroadcastChannel("sse-kv-rpc");

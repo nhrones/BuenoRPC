@@ -30,12 +30,12 @@ Deno.serve({ port: 9099 }, (request: Request): Response | Promise<Response> => {
    // Is this a KV-rpc registration request?
    if (request.url.includes("SSERPC/kvRegistration")) {
       // register our new RPC-client
-      return registerKVclient()
+      return registerKVclient(request, DEBUG)
 
    } // Is this an IO-rpc registration request?  
    else if (request.url.includes("SSERPC/ioRegistration")) {
       // register our new RPC-client
-      return registerIOclient()
+      return registerIOclient(request, DEBUG)
 
    } // POST request = RPC (Remote Procedure Calls)    
    else if (request.method === 'POST') {
