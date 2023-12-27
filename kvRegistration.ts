@@ -14,7 +14,7 @@ import {
 export function registerKVclient(req: Request, DEBUG: boolean): Response {
 
    const { searchParams } = new URL(req.url);
-   console.info('searchParams: ', searchParams)
+
    const client = searchParams.get('client') || ''
    if (DEBUG) console.log('Client registering for KV-SSE: ', client)
 
